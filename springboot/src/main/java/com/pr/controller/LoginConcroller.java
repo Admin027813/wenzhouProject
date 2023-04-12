@@ -1,0 +1,60 @@
+package com.pr.controller;
+
+import cn.dev33.satoken.session.SaSession;
+import cn.dev33.satoken.stp.SaTokenInfo;
+import cn.dev33.satoken.stp.StpUtil;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
+import com.pr.entiy.VO.LoginUserVO;
+import com.pr.enums.StatusType;
+import com.pr.enums.SysConstants;
+import com.pr.service.UserService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.baomidou.mybatisplus.extension.api.R;
+
+import javax.annotation.Resource;
+
+/**
+ * @program: springboot
+ * @description:
+ * @author: 何兰兰
+ * @create: 2023-04-11 14:32
+ **/
+@RestController
+@RequestMapping("/")
+public class LoginConcroller extends BaseController{
+    @Resource
+    private UserService userService;
+
+    @PostMapping("login")
+    public R<String> login(LoginUserVO login) {
+        //判断用户登录是否符合条件
+        LoginUserVO user = userService.getUserInfoByUserAccount(login.getUser());
+        //检查账户是否存在
+        if (ObjectUtils.isEmpty(user.getUser())) {
+            return failHandler(StatusType.LOGIN_ERROR.getDesc());
+        }
+        //检验密码
+        if (!login.getPassword().equals(user.getPassword())) {
+            return failHandler(StatusType.LOGIN_ERROR.getDesc());
+        }
+        //用户登录
+        StpUtil.login(user.getId());
+        // 获取token
+        SaTokenInfo saTokenInfo = StpUtil.getTokenInfo();
+        //获取session
+        SaSession saSession = StpUtil.getSession();
+        user.setPassword(null);
+        saSession.set(SysConstants.SESSION_USER_KEY, user);
+        return successHandler(saTokenInfo.getTokenValue());
+    }
+
+    @PostMapping("logout")
+    public R<String> logout() {
+        StpUtil.logout();
+        return successHandler(SysConstants.LOGIN_OUT_SUCCESS);
+    }
+}
