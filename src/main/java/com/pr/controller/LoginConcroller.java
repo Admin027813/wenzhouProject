@@ -5,13 +5,11 @@ import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.pr.entiy.VO.LoginUserVO;
+import com.pr.entiy.VO.UserVO;
 import com.pr.enums.StatusType;
 import com.pr.enums.SysConstants;
 import com.pr.service.UserService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.baomidou.mybatisplus.extension.api.R;
 
@@ -24,17 +22,17 @@ import javax.annotation.Resource;
  * @create: 2023-04-11 14:32
  **/
 @RestController
-@RequestMapping("/")
+@RequestMapping("/login")
 public class LoginConcroller extends BaseController{
     @Resource
     private UserService userService;
 
     @PostMapping("login")
-    public R<String> login(LoginUserVO login) {
+    public R<String> login(@ModelAttribute LoginUserVO login) {
         //判断用户登录是否符合条件
-        LoginUserVO user = userService.getUserInfoByUserAccount(login.getUser());
+        UserVO user = userService.getUserInfoByUserAccount(login.getAccount());
         //检查账户是否存在
-        if (ObjectUtils.isEmpty(user.getUser())) {
+        if (ObjectUtils.isEmpty(user.getAccount())) {
             return failHandler(StatusType.LOGIN_ERROR.getDesc());
         }
         //检验密码

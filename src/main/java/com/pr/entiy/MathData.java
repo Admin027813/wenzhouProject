@@ -17,10 +17,10 @@ import java.sql.Timestamp;
 @TableName("math_data")
 public class MathData {
     @TableId(type = IdType.AUTO)
-    private int Id;
+    private Integer Id;
     private String name; //数学家名称
-    private int sex; //性别
-    private int age; //年龄
+    private Integer sex; //性别
+    private Integer age; //年龄
     private String basicInformation; //基本信息
     private String accomplishment; //成就
     private Timestamp createTime; //创建时间

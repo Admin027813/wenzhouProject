@@ -17,10 +17,10 @@ import java.sql.Timestamp;
 @TableName("article_comment")
 public class ArticleComment {
     @TableId(type = IdType.AUTO)
-    private int id;
-    private int matherId; //数学家id
+    private Integer Id;
+    private Integer matherId; //数学家id
     private String content; //评论内容
-    private int likeNum; //点赞数
-    private long userId; //用户id
+    private Integer likeNum; //点赞数
+    private Long userId; //用户id
     private Timestamp createTime; //创建时间
 }

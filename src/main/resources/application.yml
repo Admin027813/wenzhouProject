@@ -6,11 +6,12 @@ server:
 spring:
   application:
     name: pr
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/graduation_project?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
-#    username: sysadmin
-#    password: adminsys
+    username: root
+    password: inlink
   # SSL
   # 指定证书
 # Sa-Token配置
@@ -29,7 +30,6 @@ sa-token:
   token-style: uuid
   # 是否输出操作日志
   is-log: false
-
 
   #---------------mybatis-plus配置-------------------
 mybatis-plus:

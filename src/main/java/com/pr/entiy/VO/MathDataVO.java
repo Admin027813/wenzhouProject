@@ -17,7 +17,7 @@ import java.sql.Timestamp;
 @TableName("math_data")
 public class MathDataVO {
     @TableId(type = IdType.AUTO)
-    private int Id;
+    private int id;
     private String name;
     private int sex;
     private int age;

@@ -1,6 +1,7 @@
 package com.pr.service;
 
 import com.pr.entiy.VO.LoginUserVO;
+import com.pr.entiy.VO.UserVO;
 import com.pr.service.DAO.UserDAO;
 import com.pr.util.JacksonUtil;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ import javax.annotation.Resource;
 public class UserService {
     @Resource
     private UserDAO userDAO;
-    public LoginUserVO getUserInfoByUserAccount(String userAccount){
-        return JacksonUtil.convertToObj(userDAO.getUserInfoByUserAccount(userAccount), LoginUserVO.class);
+    public UserVO getUserInfoByUserAccount(String userAccount){
+        return JacksonUtil.convertToObj(userDAO.getUserInfoByUserAccount(userAccount), UserVO.class);
     }
 }
