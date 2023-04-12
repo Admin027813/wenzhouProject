@@ -8,10 +8,11 @@ spring:
     name: pr
     exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/graduation_project?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
-    password: inlink
+#    password: inlink
+    password:
   # SSL
   # 指定证书
 # Sa-Token配置
