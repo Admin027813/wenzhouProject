@@ -1,8 +1,10 @@
 server:
   port: 8088
   servlet:
-    context-path:
-
+   encoding:
+      charset: UTF-8
+      force: true
+      enabled: true
 spring:
   profiles:
     active: pro
@@ -35,7 +37,7 @@ spring:
 
   # SSL
   # 指定证书
-# Sa-Token配置
+  # Sa-Token配置
 sa-token:
   # token前缀
   # Token前缀 与 Token值 之间必须有一个空格。
@@ -76,4 +78,5 @@ mybatis-plus:
       call-setters-on-nulls: true
       # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 

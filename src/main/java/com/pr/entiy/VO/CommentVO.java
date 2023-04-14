@@ -1,5 +1,6 @@
 package com.pr.entiy.VO;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.util.List;

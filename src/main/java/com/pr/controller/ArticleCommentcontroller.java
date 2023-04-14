@@ -4,12 +4,15 @@ import com.baomidou.mybatisplus.extension.api.R;
 import com.pr.entiy.VO.ArticleCommentVO;
 import com.pr.entiy.VO.UserVO;
 import com.pr.service.ArticleCommentService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("comment")
+@Api(tags = "评论模块")
 public class ArticleCommentcontroller extends BaseController{
     @Resource
     private ArticleCommentService articleCommentService;
@@ -21,16 +24,19 @@ public class ArticleCommentcontroller extends BaseController{
 //    }
 
     @PutMapping("updataUser")
+    @ApiOperation("修改评论")
     public R<Boolean> updataUserData(@RequestBody ArticleCommentVO articleCommentVO){
         return successHandler(articleCommentService.updateComment(articleCommentVO));
     }
 
     @PostMapping("creatUser")
+    @ApiOperation("新增评论")
     public R<Boolean> creatUserData(@RequestBody ArticleCommentVO articleCommentVO){
         return successHandler(articleCommentService.creatComment(articleCommentVO));
     }
 
     @DeleteMapping("deleteUser")
+    @ApiOperation("删除评论")
     public R<Boolean> deleteUserData(@RequestParam Integer id){
         return successHandler(articleCommentService.deleteComment(id));
     }

@@ -9,6 +9,8 @@ import com.pr.entiy.VO.UserVO;
 import com.pr.enums.StatusType;
 import com.pr.enums.SysConstants;
 import com.pr.service.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import com.baomidou.mybatisplus.extension.api.R;
@@ -17,12 +19,14 @@ import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/login")
+@Api(tags = "登录模块")
 public class LoginConcroller extends BaseController{
     @Resource
     private UserService userService;
 
     @PostMapping("login")
     @ResponseBody
+    @ApiOperation("登录")
     public R<String> login(LoginUserVO login) {
         //判断用户登录是否符合条件
         UserVO user = userService.getUserInfoByUserAccount(login.getAccount());
@@ -46,6 +50,7 @@ public class LoginConcroller extends BaseController{
     }
 
     @PostMapping("logout")
+    @ApiOperation("退出")
     public R<String> logout() {
         StpUtil.logout();
         return successHandler(SysConstants.LOGIN_OUT_SUCCESS);

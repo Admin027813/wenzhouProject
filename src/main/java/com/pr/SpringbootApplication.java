@@ -5,7 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration;
+import springfox.documentation.oas.annotations.EnableOpenApi;
 
+@EnableOpenApi
 @SpringBootApplication
 @MapperScan("com.pr.mapper")
 public class SpringbootApplication {
