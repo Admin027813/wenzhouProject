@@ -4,19 +4,44 @@ server:
     context-path:
 
 spring:
+  profiles:
+    active: pro
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
   application:
     name: pr
-    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+#  exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/graduation_project?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
-#    password: inlink
-    password:
+    password: inlink
+#    password:
+
+# 配置业务使用的 Redis 连接
+  redis:
+      # Redis数据库索引（默认为0）
+      database: 1
+      # Redis服务器地址
+      host: 127.0.0.1
+      # Redis服务器连接端口
+      port: 6379
+      # Redis服务器连接密码（默认为空）
+      password:
+      # 连接超时时间
+      timeout: 10s
+
   # SSL
   # 指定证书
 # Sa-Token配置
 sa-token:
+  # token前缀
+  # Token前缀 与 Token值 之间必须有一个空格。
+  # 一旦配置了 Token前缀，则前端提交 Token 时，必须带有前缀，否则会导致框架无法读取 Token。
+  # 由于Cookie中无法存储空格字符，也就意味配置 Token 前缀后，Cookie 鉴权方式将会失效，此时只能将 Token 提交到header里进行传输
+  # token-prefix: Bearer
   # token名称 (同时也是cookie名称)
   token-name: satoken
   # token有效期，单位s 默认30天, -1代表永不过期
@@ -32,17 +57,18 @@ sa-token:
   # 是否输出操作日志
   is-log: false
 
+
   #---------------mybatis-plus配置-------------------
 mybatis-plus:
     mapper-locations: classpath:/src/main/resources/mapper/*Mapper.xml
     typeAliasesPackage: com.yl.data.entity
     # 以下配置均有默认值,可以不设置
-    global-config:
-     db-config:
-        #字段策略 IGNORED:"忽略判断"  NOT_NULL:"非 NULL 判断")  NOT_EMPTY:"非空判断"
-      field-strategy: NOT_EMPTY
-        #数据库类型
-      db-type: mysql
+#    global-config:
+#     db-config:
+#        #字段策略 IGNORED:"忽略判断"  NOT_NULL:"非 NULL 判断")  NOT_EMPTY:"非空判断"
+#      field-strategy: NOT_EMPTY
+#        #数据库类型
+#        db-type: mysql
     configuration:
       # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
       map-underscore-to-camel-case: true

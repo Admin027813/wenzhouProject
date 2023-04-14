@@ -1,10 +1,5 @@
 package com.pr.enums;
 
-/**
- * @author: zjr
- * @create: 2022/4/8 12:45 AM
- * @description: 状态
- **/
 public enum StatusType {
     OK(0, "OK"),
     FAIL(5000, "未知错误"),

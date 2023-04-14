@@ -1,17 +1,10 @@
-package com.yl.data.config;
+package com.pr.common.config;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
 import java.io.IOException;
-
-/**
- * @program: troubleshoot
- * @description:
- * @author: ljc
- * @create: 2022-08-10 08:43
- **/
 
 /**
  * 自定义LongToString序列化器

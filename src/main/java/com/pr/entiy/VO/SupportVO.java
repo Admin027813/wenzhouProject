@@ -1,19 +1,11 @@
-package com.pr.entiy;
+package com.pr.entiy.VO;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
-/**
- * @program: springboot
- * @description:评论
- * @author: 何兰兰
- * @create: 2023-04-11 13:49
- **/
 @Data
-@TableName("article_comment")
-public class Support {
+public class SupportVO {
     @TableId(type = IdType.AUTO)
     private Integer Id;
     private Integer type; //点赞类型

@@ -1,10 +1,5 @@
 package com.pr.enums;
 
-/**
- * @author: zjr
- * @create: 2022/4/8 10:56 AM
- * @description: 公共常量
- **/
 public class SysConstants {
     SysConstants() {
     }

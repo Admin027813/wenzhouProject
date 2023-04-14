@@ -1,27 +1,13 @@
-package com.pr.entiy.VO;/**
+package com.pr.entiy.VO;
 
- 
+import lombok.Data;
 
-* @program: springboot
- 
+import java.util.List;
 
-*
- 
-
-* @description:
- 
-
-*
- 
-
-* @author: ljc
- 
-
-*
- 
-
-* @create: 2023-04-13 15:45
- 
-
-**/public class CommentVO {
+@Data
+public class CommentVO {
+    private Integer userId;
+    private String  context;
+    private Integer supportNum;
+    private List<CommentVO> commentVOList;
 }

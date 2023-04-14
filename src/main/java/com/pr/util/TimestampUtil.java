@@ -1,25 +1,14 @@
-package com.yl.common.util;
-
-import org.springframework.util.StringUtils;
+package com.pr.util;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import static com.pr.enums.SysConstants.TIME_FORMAT;
 
-import static com.yl.common.constants.SysConstants.DATE_FORMAT;
-import static com.yl.common.constants.SysConstants.TIME_FORMAT;
-import static java.sql.Timestamp.*;
-
-/**
- * @author: zjr
- * @create: 2022/4/6 4:52 PM
- * @description: timestamp工具类
- **/
 public class TimestampUtil {
     /**
      * 将timestamp数据按照格式转换为指定字符串

@@ -15,12 +15,6 @@ import com.baomidou.mybatisplus.extension.api.R;
 
 import javax.annotation.Resource;
 
-/**
- * @program: springboot
- * @description:
- * @author: 何兰兰
- * @create: 2023-04-11 14:32
- **/
 @RestController
 @RequestMapping("/login")
 public class LoginConcroller extends BaseController{
@@ -28,7 +22,8 @@ public class LoginConcroller extends BaseController{
     private UserService userService;
 
     @PostMapping("login")
-    public R<String> login(@ModelAttribute LoginUserVO login) {
+    @ResponseBody
+    public R<String> login(LoginUserVO login) {
         //判断用户登录是否符合条件
         UserVO user = userService.getUserInfoByUserAccount(login.getAccount());
         //检查账户是否存在

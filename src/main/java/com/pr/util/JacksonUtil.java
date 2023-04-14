@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.time.LocalDateTime;
@@ -18,11 +17,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author: zjr
- * @create: 2022/4/8 1:03 AM
- * @description: 相同属性类转换
- **/
 public class JacksonUtil {
     private static final String UTF_8 = "UTF-8";
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();

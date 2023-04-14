@@ -1,10 +1,6 @@
-package com.yl.common.constants;
+package com.pr.enums;
 
-/**
- * @author: zjr
- * @create: 2022/5/16 22:38
- * @description: 错误消息提示
- **/
+
 public class SysErrorMessage {
     public static final String COLLECTION_EMPTY = "集合为空";
 

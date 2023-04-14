@@ -1,27 +1,37 @@
-package com.pr.controller;/**
+package com.pr.controller;
 
- 
+import com.baomidou.mybatisplus.extension.api.R;
+import com.pr.entiy.VO.MathDataVO;
+import com.pr.entiy.VO.UserVO;
+import com.pr.service.MathDataService;
+import org.springframework.web.bind.annotation.*;
 
-* @program: springboot
- 
+import javax.annotation.Resource;
 
-*
- 
+@RequestMapping("/math")
+@RestController
+public class MatherDataController extends BaseController{
+    @Resource
+    private MathDataService mathDataService;
 
-* @description:
- 
+    @GetMapping("getMath")
+    public R<MathDataVO> getMathData(@RequestParam Integer id){
+        MathDataVO math = mathDataService.getMathInfo(id);
+        return successHandler(math);
+    }
 
-*
- 
+    @PutMapping("updataMath")
+    public R<Boolean> updataMathData(@RequestBody MathDataVO mathDataVO){
+        return successHandler(mathDataService.updataMathData(mathDataVO));
+    }
 
-* @author: ljc
- 
+    @PostMapping("creatMath")
+    public R<Boolean> creatMathData(@RequestBody MathDataVO mathDataVO){
+        return successHandler(mathDataService.creatMathData(mathDataVO));
+    }
 
-*
- 
-
-* @create: 2023-04-13 14:55
- 
-
-**/public class MatherDataController {
+    @DeleteMapping("deleteMath")
+    public R<Boolean> deleteMathData(@RequestParam Integer id){
+        return successHandler(mathDataService.deleteMathData(id));
+    }
 }

@@ -1,24 +1,40 @@
 package com.pr.service;
 
-import com.pr.entiy.VO.LoginUserVO;
+import cn.dev33.satoken.session.SaSession;
+import cn.dev33.satoken.stp.StpUtil;
+import com.pr.entiy.User;
 import com.pr.entiy.VO.UserVO;
 import com.pr.service.DAO.UserDAO;
 import com.pr.util.JacksonUtil;
 import org.springframework.stereotype.Service;
-
 import javax.annotation.Resource;
 
-/**
- * @program: springboot
- * @description:
- * @author: 何兰兰
- * @create: 2023-04-11 15:15
- **/
 @Service
 public class UserService {
     @Resource
     private UserDAO userDAO;
+
     public UserVO getUserInfoByUserAccount(String userAccount){
         return JacksonUtil.convertToObj(userDAO.getUserInfoByUserAccount(userAccount), UserVO.class);
+    }
+
+    public UserVO getInfo(){
+        SaSession saSession = StpUtil.getSession();
+        UserVO user = saSession.getModel("UserInfo", UserVO.class);
+        return user;
+    }
+
+    public boolean updataUserData(UserVO userVO){
+        return userDAO.updateById(JacksonUtil.convertToObj(userVO, User.class));
+    }
+
+    public boolean creatUserData(UserVO userVO){
+        return userDAO.save(JacksonUtil.convertToObj(userVO, User.class));
+    }
+
+    public boolean deleteUserData(Integer id){
+        Boolean b = userDAO.removeById(id);
+        StpUtil.kickout(id);
+        return b;
     }
 }

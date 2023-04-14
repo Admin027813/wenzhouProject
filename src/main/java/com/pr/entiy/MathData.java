@@ -1,18 +1,9 @@
 package com.pr.entiy;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
+import java.time.LocalDateTime;
 
-import java.sql.Timestamp;
-
-/**
- * @program: springboot
- * @description:数学家数据
- * @author: 何兰兰
- * @create: 2023-04-11 13:45
- **/
 @Data
 @TableName("math_data")
 public class MathData {
@@ -23,5 +14,6 @@ public class MathData {
     private Integer age; //年龄
     private String basicInformation; //基本信息
     private String accomplishment; //成就
-    private Timestamp createTime; //创建时间
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime; //创建时间
 }
