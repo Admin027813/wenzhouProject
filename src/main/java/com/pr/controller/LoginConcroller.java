@@ -25,9 +25,8 @@ public class LoginConcroller extends BaseController{
     private UserService userService;
 
     @PostMapping("login")
-    @ResponseBody
     @ApiOperation("登录")
-    public R<String> login(LoginUserVO login) {
+    public R<String> login(@RequestBody LoginUserVO login) {
         //判断用户登录是否符合条件
         UserVO user = userService.getUserInfoByUserAccount(login.getAccount());
         //检查账户是否存在
@@ -49,7 +48,7 @@ public class LoginConcroller extends BaseController{
         return successHandler(saTokenInfo.getTokenValue());
     }
 
-    @PostMapping("logout")
+    @GetMapping("logout")
     @ApiOperation("退出")
     public R<String> logout() {
         StpUtil.logout();

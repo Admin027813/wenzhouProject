@@ -1,6 +1,9 @@
 package com.pr.common.config;
 
+import cn.dev33.satoken.interceptor.SaAnnotationInterceptor;
+import cn.dev33.satoken.interceptor.SaInterceptor;
 import cn.dev33.satoken.interceptor.SaRouteInterceptor;
+import cn.dev33.satoken.stp.StpUtil;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -29,8 +32,9 @@ public class SaTokenConfigure implements WebMvcConfigurer {
         urls.add("/doc.html");
         urls.add("/swagger-ui.html");
         urls.add("/login/login");
+        urls.add("/user/creatUser");
         // 注册Sa-Token的路由拦截器，并排除登录接口或其他可匿名访问的接口地址 (与注解拦截器无关)
-        registry.addInterceptor(new SaRouteInterceptor())
+        registry.addInterceptor(new SaInterceptor(handle -> StpUtil.checkLogin()))
                 .addPathPatterns("/**")
                 .excludePathPatterns(urls);
     }

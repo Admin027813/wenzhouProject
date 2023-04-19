@@ -5,9 +5,11 @@ import com.pr.entiy.VO.UserVO;
 import com.pr.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
+import javax.xml.crypto.Data;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/user")
@@ -25,13 +27,16 @@ public class UserController extends BaseController {
 
     @PutMapping("updateUser")
     @ApiOperation("修改用户信息")
-    public R<Boolean> updataUserData( UserVO userVO){
+    public R<Boolean> updataUserData(@RequestBody UserVO userVO){
        return successHandler(userService.updataUserData(userVO));
     }
 
     @PostMapping("creatUser")
     @ApiOperation("注册用户")
     public R<Boolean> creatUserData(@RequestBody UserVO userVO){
+        userVO.setDescription("你好新来的!");
+        userVO.setBirthDate(LocalDateTime.now());
+        userVO.setRole(1);
         return successHandler(userService.creatUserData(userVO));
     }
 
