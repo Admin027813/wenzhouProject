@@ -8,6 +8,7 @@ import com.pr.service.DAO.UserDAO;
 import com.pr.util.JacksonUtil;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -24,6 +25,11 @@ public class UserService {
         return user;
     }
 
+    public List<UserVO> getUserList(){
+        return JacksonUtil.convertToList(userDAO.list(), UserVO.class);
+    }
+
+
     public boolean updataUserData(UserVO userVO){
         return userDAO.updateById(JacksonUtil.convertToObj(userVO, User.class));
     }
@@ -34,6 +40,12 @@ public class UserService {
 
     public boolean deleteUserData(Integer id){
         Boolean b = userDAO.removeById(id);
+        StpUtil.kickout(id);
+        return b;
+    }
+
+    public boolean deleteUserDatas(List id){
+        Boolean b = userDAO.removeByIds(id);
         StpUtil.kickout(id);
         return b;
     }

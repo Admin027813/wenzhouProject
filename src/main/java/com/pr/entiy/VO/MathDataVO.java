@@ -1,9 +1,12 @@
 package com.pr.entiy.VO;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 @Data
@@ -14,15 +17,23 @@ public class MathDataVO {
     private int id;
     @ApiModelProperty("姓名")
     private String name;
-    @ApiModelProperty("性别")
-    private int sex;
-    @ApiModelProperty("年龄")
-    private int age;
+    @ApiModelProperty("图片")
+    private String img;
+    @ApiModelProperty("死亡时间")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date dieDate;
+    @ApiModelProperty("出生时间")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date birthDate; //
     @ApiModelProperty("基本信息")
     private String basicInformation;
     @ApiModelProperty("成就")
     private String accomplishment;
     @ApiModelProperty("创建时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
+    @ApiModelProperty("评论数量")
+    private Integer ArtSum;
+    @ApiModelProperty("点赞数量")
+    private Integer supSum;
 }

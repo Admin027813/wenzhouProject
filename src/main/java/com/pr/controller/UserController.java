@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import javax.xml.crypto.Data;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -25,6 +26,13 @@ public class UserController extends BaseController {
         return successHandler(user);
     }
 
+    @GetMapping("getUserList")
+    @ApiOperation("批量获取用户信息")
+    public R<List<UserVO>> getUserList(){
+        List<UserVO> user = userService.getUserList();
+        return successHandler(user);
+    }
+
     @PutMapping("updateUser")
     @ApiOperation("修改用户信息")
     public R<Boolean> updataUserData(@RequestBody UserVO userVO){
@@ -34,9 +42,6 @@ public class UserController extends BaseController {
     @PostMapping("creatUser")
     @ApiOperation("注册用户")
     public R<Boolean> creatUserData(@RequestBody UserVO userVO){
-        userVO.setDescription("你好新来的!");
-        userVO.setBirthDate(LocalDateTime.now());
-        userVO.setRole(1);
         return successHandler(userService.creatUserData(userVO));
     }
 
@@ -44,5 +49,11 @@ public class UserController extends BaseController {
     @ApiOperation("删除用户")
     public R<Boolean> deleteUserData(@RequestParam(value = "id") Integer id){
         return successHandler(userService.deleteUserData(id));
+    }
+
+    @DeleteMapping("deleteUsers")
+    @ApiOperation("删除用户组")
+    public R<Boolean> deleteUserDatas(@RequestParam(value = "id") List<Integer> id){
+        return successHandler(userService.deleteUserDatas(id));
     }
 }

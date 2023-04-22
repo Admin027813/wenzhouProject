@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pr.mapper.MathDataMapper">
+
+    <select id="getMathList" resultType="com.pr.entiy.VO.MathDataVO">
+        select *,(select count(*) FROM article_comment art where art.mather_id = math.id) ArtSum,(select count(*) FROM support s where s.target_id = math.id and s.type =1) supSum from math_data math
+    </select>
+</mapper>

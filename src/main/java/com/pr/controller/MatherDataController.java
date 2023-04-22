@@ -3,12 +3,14 @@ package com.pr.controller;
 import com.baomidou.mybatisplus.extension.api.R;
 import com.pr.entiy.VO.MathDataVO;
 import com.pr.entiy.VO.UserVO;
+import com.pr.service.ArticleCommentService;
 import com.pr.service.MathDataService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RequestMapping("/math")
 @RestController
@@ -16,13 +18,23 @@ import javax.annotation.Resource;
 public class MatherDataController extends BaseController{
     @Resource
     private MathDataService mathDataService;
+    @Resource
+    private ArticleCommentService articleCommentService;
 
     @GetMapping("getMath")
     @ApiOperation("获取数学家信息")
     public R<MathDataVO> getMathData(@RequestParam Integer id){
+        Integer sum = articleCommentService.CommentNum(id);
         MathDataVO math = mathDataService.getMathInfo(id);
+        math.setArtSum(sum);
         return successHandler(math);
     }
+    @GetMapping("getMathList")
+    @ApiOperation("获取数学家列表")
+    public R<List<MathDataVO>> getMathList(){
+        return successHandler(mathDataService.getMathList());
+    }
+
 
     @PutMapping("updataMath")
     @ApiOperation("修改数学家信息")
