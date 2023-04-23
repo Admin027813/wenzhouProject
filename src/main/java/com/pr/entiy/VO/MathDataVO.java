@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
@@ -17,6 +18,7 @@ public class MathDataVO {
     private int id;
     @ApiModelProperty("姓名")
     private String name;
+    @Value("${file.uploadFolder}")
     @ApiModelProperty("图片")
     private String img;
     @ApiModelProperty("死亡时间")
@@ -33,7 +35,7 @@ public class MathDataVO {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
     @ApiModelProperty("评论数量")
-    private Integer ArtSum;
+    private Integer artSum = 0;
     @ApiModelProperty("点赞数量")
-    private Integer supSum;
+    private Integer supSum = 0;
 }

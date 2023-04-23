@@ -19,19 +19,20 @@ public class ArticleCommentcontroller extends BaseController{
     @Resource
     private ArticleCommentService articleCommentService;
 
-    @GetMapping("getUser")
-    public R<List<CommentVO>> getUserData(@RequestParam Integer id){
-        List<CommentVO> commentVO = articleCommentService.getComment(id);
+    @GetMapping("getComment")
+    @ApiOperation("获取评论")
+    public R<List<ArticleCommentVO>> getCommentData(@RequestParam(value = "id",required=false) Integer id){
+        List<ArticleCommentVO> commentVO = articleCommentService.getComment(id);
         return successHandler(commentVO);
     }
 
-    @PostMapping("creatUser")
+    @PostMapping("creatComment")
     @ApiOperation("新增评论")
     public R<Boolean> creatUserData(@RequestBody ArticleCommentVO articleCommentVO){
         return successHandler(articleCommentService.creatComment(articleCommentVO));
     }
 
-    @DeleteMapping("deleteUser")
+    @DeleteMapping("deleteComment")
     @ApiOperation("删除评论")
     public R<Boolean> deleteUserData(@RequestParam Integer id){
         return successHandler(articleCommentService.deleteComment(id));

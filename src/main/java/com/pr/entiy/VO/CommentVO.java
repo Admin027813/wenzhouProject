@@ -11,5 +11,4 @@ public class CommentVO {
     private Integer userId;
     private String  context;
     private Integer supportNum;
-    private List<CommentVO> commentVOList;
 }

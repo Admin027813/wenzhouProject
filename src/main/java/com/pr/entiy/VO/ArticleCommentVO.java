@@ -20,6 +20,10 @@ public class ArticleCommentVO {
     private int parentCommentId; //父评论父用户
     @ApiModelProperty("用户id")
     private long userId; //用户id
+    @ApiModelProperty("用户名")
+    private String userName;
+    @ApiModelProperty("点赞数量")
+    private Integer support;
     @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty("创建时间")
     private LocalDateTime createTime; //创建时间

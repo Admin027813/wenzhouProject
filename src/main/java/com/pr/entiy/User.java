@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class User {
     @TableId(type = IdType.AUTO)
     private Integer id; //id
+    private String userName;
     private String account; //用户
     private String password; //密码
     private String phone; //手机号

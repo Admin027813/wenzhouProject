@@ -1,10 +1,13 @@
 package com.pr.service;
 
 import com.pr.entiy.ArticleComment;
+import com.pr.entiy.Support;
+import com.pr.entiy.User;
 import com.pr.entiy.VO.ArticleCommentVO;
 import com.pr.entiy.VO.CommentVO;
 import com.pr.service.DAO.ArticleCommentDAO;
 import com.pr.service.DAO.SupportDAO;
+import com.pr.service.DAO.UserDAO;
 import com.pr.util.JacksonUtil;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Service;
@@ -18,16 +21,29 @@ public class ArticleCommentService {
     private ArticleCommentDAO articleCommentDAO;
     @Resource
     private SupportDAO supportDAO;
+    @Resource
+    private UserDAO userDAO;
     //get评论
-    public List<CommentVO> getComment(Integer mathId){
-        List<CommentVO> commentVOList = new ArrayList<>();
-        List<Integer> supportNum=new ArrayList<>();
+    public List<ArticleCommentVO> getComment(Integer mathId){
+        List<Support> supports =  supportDAO.list();
+        List<User> users = userDAO.list();
         List<ArticleComment> articleCommentList = articleCommentDAO.getComment(mathId);
-        for (ArticleComment articleComment : articleCommentList) {
-            supportNum.add(articleComment.getMatherId());
+        List<ArticleCommentVO> articleCommentVOS =  JacksonUtil.convertToList(articleCommentList,ArticleCommentVO.class);
+        for (ArticleCommentVO articleComment : articleCommentVOS) {
+            int supSum = 0;
+            for (Support support : supports) {
+                if(support.getType().equals(1) && support.getTargetId().equals(articleComment.getId())){
+                    supSum++;
+                }
+            }
+            for (User user : users) {
+                if(user.getId() == articleComment.getId()){
+                    articleComment.setUserName(user.getUserName());
+                }
+            }
+            articleComment.setSupport(supSum);
         }
-        supportDAO.getSupportNum(supportNum);
-        return null;
+        return articleCommentVOS;
     }
     //新增评论
     public Boolean creatComment(ArticleCommentVO articleCommentVO){

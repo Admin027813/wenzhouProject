@@ -29,6 +29,7 @@ public class MatherDataController extends BaseController{
         math.setArtSum(sum);
         return successHandler(math);
     }
+
     @GetMapping("getMathList")
     @ApiOperation("获取数学家列表")
     public R<List<MathDataVO>> getMathList(){

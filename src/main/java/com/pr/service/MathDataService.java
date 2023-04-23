@@ -46,7 +46,7 @@ public class MathDataService {
             for (ArticleComment articleComment : articleComments) {
                 if(articleComment.getMatherId().equals(mathDataVO.getId())){
                     artSum++;
-                    mathDataVO.setSupSum(artSum);
+                    mathDataVO.setArtSum(artSum);
                 }
             }
         }
