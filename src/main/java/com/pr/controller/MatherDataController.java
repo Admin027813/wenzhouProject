@@ -2,7 +2,6 @@ package com.pr.controller;
 
 import com.baomidou.mybatisplus.extension.api.R;
 import com.pr.entiy.VO.MathDataVO;
-import com.pr.entiy.VO.UserVO;
 import com.pr.service.ArticleCommentService;
 import com.pr.service.MathDataService;
 import io.swagger.annotations.Api;
@@ -27,6 +26,17 @@ public class MatherDataController extends BaseController{
         Integer sum = articleCommentService.CommentNum(id);
         MathDataVO math = mathDataService.getMathInfo(id);
         math.setArtSum(sum);
+        return successHandler(math);
+    }
+
+    @GetMapping("selectMath")
+    @ApiOperation("获取数学家信息")
+    public R<List<MathDataVO>> getSelectData(@RequestParam String name){
+        List<MathDataVO> math = mathDataService.getMath(name);
+        for (MathDataVO mathDataVO : math) {
+            Integer sum = articleCommentService.CommentNum(mathDataVO.getId());
+            mathDataVO.setArtSum(sum);
+        }
         return successHandler(math);
     }
 

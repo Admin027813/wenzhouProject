@@ -24,9 +24,15 @@ public class MathDataService {
     @Resource
     private ArticleCommentDAO articleCommentDAO;
 
+    //详情
     public MathDataVO getMathInfo(Integer id){
         MathData mathData = mathDataDAO.getById(id);
         return JacksonUtil.convertToObj(mathData,MathDataVO.class);
+    }
+
+    //搜索
+    public List<MathDataVO> getMath(String name){
+        return mathDataDAO.getMath(name);
     }
 
     public List<MathDataVO> getMathList(){

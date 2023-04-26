@@ -4,6 +4,7 @@ import cn.dev33.satoken.session.SaSession;
 import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
+import com.pr.entiy.User;
 import com.pr.entiy.VO.LoginUserVO;
 import com.pr.entiy.VO.UserVO;
 import com.pr.enums.StatusType;
@@ -28,7 +29,10 @@ public class LoginConcroller extends BaseController{
     @ApiOperation("登录")
     public R<String> login(@RequestBody LoginUserVO login) {
         //判断用户登录是否符合条件
-        UserVO user = userService.getUserInfoByUserAccount(login.getAccount());
+        User user = userService.getUserInfoByUserAccount(login);
+        if(ObjectUtils.isNull(user)){
+            return failHandler(StatusType.LOGIN_ERROR.getDesc());
+        }
         //检查账户是否存在
         if (ObjectUtils.isEmpty(user.getAccount())) {
             return failHandler(StatusType.LOGIN_ERROR.getDesc());

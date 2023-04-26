@@ -7,9 +7,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
-import javax.xml.crypto.Data;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -23,6 +20,13 @@ public class UserController extends BaseController {
     @ApiOperation("获取用户信息")
     public R<UserVO> getUserData(){
         UserVO user = userService.getInfo();
+        return successHandler(user);
+    }
+
+    @GetMapping("selectUser")
+    @ApiOperation("搜索用户信息")
+    public R<List<UserVO>> selectUserData(@RequestParam(value = "name") String name){
+        List<UserVO> user = userService.getUser(name);
         return successHandler(user);
     }
 

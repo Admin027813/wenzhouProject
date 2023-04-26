@@ -9,7 +9,7 @@ public enum StatusType {
     DUPLICATE_COLUMN(5101, "非唯一性错误"),
     AUTH_ERROR(5200, "认证/授权错误"),
     NO_LOGIN(5201, "访问受限，请先登录"),
-    LOGIN_ERROR(5202, "账号或者密码错误"),
+    LOGIN_ERROR(5202, "The account or password is incorrect"),
     TOKEN_ERROR(5203, "获取token错误"),
     INVALID_TOKEN(5204, "无效的token"),
     RESOURCE_ACCESS_DENIED(5205, "资源访问受限，请开通该资源授权"),

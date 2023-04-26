@@ -11,4 +11,6 @@ public class LoginUserVO {
     private String account; //用户
     @ApiModelProperty("密码")
     private String password; //密码
+    @ApiModelProperty("权限")
+    private Integer role;
 }

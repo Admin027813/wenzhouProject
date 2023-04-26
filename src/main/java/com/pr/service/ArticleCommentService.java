@@ -11,11 +11,13 @@ import com.pr.service.DAO.UserDAO;
 import com.pr.util.JacksonUtil;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class ArticleCommentService {
     @Resource
     private ArticleCommentDAO articleCommentDAO;
@@ -37,7 +39,7 @@ public class ArticleCommentService {
                 }
             }
             for (User user : users) {
-                if(user.getId() == articleComment.getId()){
+                if(user.getId() == articleComment.getUserId()){
                     articleComment.setUserName(user.getUserName());
                 }
             }

@@ -1,6 +1,7 @@
 package com.pr.entiy.VO;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -16,15 +17,13 @@ public class ArticleCommentVO {
     private int matherId; //数学家id
     @ApiModelProperty("评论内容")
     private String content; //评论内容
-    @ApiModelProperty("父评论父用户")
-    private int parentCommentId; //父评论父用户
     @ApiModelProperty("用户id")
     private long userId; //用户id
     @ApiModelProperty("用户名")
     private String userName;
     @ApiModelProperty("点赞数量")
     private Integer support;
-    @TableField(fill = FieldFill.INSERT_UPDATE)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @ApiModelProperty("创建时间")
     private LocalDateTime createTime; //创建时间
 }
