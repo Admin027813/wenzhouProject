@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,10 +33,10 @@ public class ArticleCommentService {
         List<ArticleComment> articleCommentList = articleCommentDAO.getComment(mathId);
         List<ArticleCommentVO> articleCommentVOS =  JacksonUtil.convertToList(articleCommentList,ArticleCommentVO.class);
         for (ArticleCommentVO articleComment : articleCommentVOS) {
-            int supSum = 0;
+            List<Support> supSum = new ArrayList<>();
             for (Support support : supports) {
-                if(support.getType().equals(1) && support.getTargetId().equals(articleComment.getId())){
-                    supSum++;
+                if(support.getType().equals(2) && support.getTargetId().equals(articleComment.getId())){
+                    supSum.add(support);
                 }
             }
             for (User user : users) {
@@ -43,7 +44,7 @@ public class ArticleCommentService {
                     articleComment.setUserName(user.getUserName());
                 }
             }
-            articleComment.setSupport(supSum);
+            articleComment.setSupport(supSum.size());
         }
         return articleCommentVOS;
     }

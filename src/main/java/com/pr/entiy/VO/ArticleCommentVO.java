@@ -18,7 +18,7 @@ public class ArticleCommentVO {
     @ApiModelProperty("评论内容")
     private String content; //评论内容
     @ApiModelProperty("用户id")
-    private long userId; //用户id
+    private Integer userId; //用户id
     @ApiModelProperty("用户名")
     private String userName;
     @ApiModelProperty("点赞数量")

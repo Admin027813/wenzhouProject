@@ -34,8 +34,6 @@ public class MathDataVO {
     @ApiModelProperty("创建时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
-    @ApiModelProperty("评论数量")
-    private Integer artSum = 0;
     @ApiModelProperty("点赞数量")
     private Integer supSum = 0;
 }

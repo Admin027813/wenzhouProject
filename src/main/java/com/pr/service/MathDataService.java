@@ -26,8 +26,11 @@ public class MathDataService {
 
     //详情
     public MathDataVO getMathInfo(Integer id){
+        Integer sum =  supportDAO.getSupportNum(id);
         MathData mathData = mathDataDAO.getById(id);
-        return JacksonUtil.convertToObj(mathData,MathDataVO.class);
+        MathDataVO mathDataVO = JacksonUtil.convertToObj(mathData,MathDataVO.class);
+        mathDataVO.setSupSum(sum);
+        return mathDataVO;
     }
 
     //搜索
@@ -36,27 +39,7 @@ public class MathDataService {
     }
 
     public List<MathDataVO> getMathList(){
-     List<MathData> mathData = mathDataDAO.list();
-     List<Support> supports =    supportDAO.list();
-     List<ArticleComment> articleComments = articleCommentDAO.list();
-     List<MathDataVO> mathDataVOS =  JacksonUtil.convertToList(mathData,MathDataVO.class);
-        for (MathDataVO mathDataVO : mathDataVOS) {
-            int supSum = 0;
-            int artSum = 0;
-            for (Support support : supports) {
-                if(support.getType().equals(1)&&support.getTargetId().equals(mathDataVO.getId())){
-                    supSum++;
-                    mathDataVO.setSupSum(supSum);
-                }
-            }
-            for (ArticleComment articleComment : articleComments) {
-                if(articleComment.getMatherId().equals(mathDataVO.getId())){
-                    artSum++;
-                    mathDataVO.setArtSum(artSum);
-                }
-            }
-        }
-        return mathDataVOS;
+     return JacksonUtil.convertToList(mathDataDAO.list(),MathDataVO.class);
     }
 
     public boolean updataMathData(MathDataVO mathData){

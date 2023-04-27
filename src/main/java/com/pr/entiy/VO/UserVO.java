@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @ApiModel("用户模型")
@@ -23,8 +24,8 @@ public class UserVO {
     private String phone; //手机号
     private String email;//邮箱
     @ApiModelProperty("生日")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime birthDate; //生日
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date birthDate; //生日
     @ApiModelProperty("权限")
     private int role; //权限
     @ApiModelProperty("创建时间")

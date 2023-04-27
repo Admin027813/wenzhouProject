@@ -23,9 +23,7 @@ public class MatherDataController extends BaseController{
     @GetMapping("getMath")
     @ApiOperation("获取数学家信息")
     public R<MathDataVO> getMathData(@RequestParam Integer id){
-        Integer sum = articleCommentService.CommentNum(id);
         MathDataVO math = mathDataService.getMathInfo(id);
-        math.setArtSum(sum);
         return successHandler(math);
     }
 
@@ -33,10 +31,6 @@ public class MatherDataController extends BaseController{
     @ApiOperation("获取数学家信息")
     public R<List<MathDataVO>> getSelectData(@RequestParam String name){
         List<MathDataVO> math = mathDataService.getMath(name);
-        for (MathDataVO mathDataVO : math) {
-            Integer sum = articleCommentService.CommentNum(mathDataVO.getId());
-            mathDataVO.setArtSum(sum);
-        }
         return successHandler(math);
     }
 
